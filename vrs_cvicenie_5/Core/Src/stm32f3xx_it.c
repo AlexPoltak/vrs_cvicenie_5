@@ -226,30 +226,7 @@ void SysTick_Handler(void)
 /**
   * @brief This function handles EXTI line 4 interrupt.
   */
-void EXTI4_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI4_IRQn 0 */
-	if(checkButtonState(GPIO_PORT_BUTTON,
-							GPIO_PIN_BUTTON,
-							BUTTON_EXTI_TRIGGER,
-							BUTTON_EXTI_SAMPLES_WINDOW,
-							BUTTON_EXTI_SAMPLES_REQUIRED))
-		{
-			switch_state ^= 1;
-		}
 
-  /* USER CODE END EXTI4_IRQn 0 */
-  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_4) != RESET)
-  {
-    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_4);
-    /* USER CODE BEGIN LL_EXTI_LINE_4 */
-
-    /* USER CODE END LL_EXTI_LINE_4 */
-  }
-  /* USER CODE BEGIN EXTI4_IRQn 1 */
-
-  /* USER CODE END EXTI4_IRQn 1 */
-}
 
 /* USER CODE BEGIN 1 */
 
