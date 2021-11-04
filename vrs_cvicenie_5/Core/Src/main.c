@@ -61,6 +61,9 @@ void SystemClock_Config(void);
   * @brief  The application entry point.
   * @retval int
   */
+uint8_t checkButtonState(GPIO_TypeDef* PORT, uint8_t PIN, uint8_t edge, uint8_t samples_window, uint8_t samples_required)
+
+uint8_t switch_state = 0;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -139,7 +142,21 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+uint8_t checkButtonState(GPIO_TypeDef* PORT, uint8_t PIN, uint8_t edge, uint8_t samples_window, uint8_t samples_required)
+{
+	uint8_t button_state = 0;
+	  //type your code for "checkButtonState" implementation here:
 
+	for(int i=1;i<=samples_window;i++){
+		if((PORT->IDR & (1 << PIN))	!=edge){button_state++;}
+		else{button_state=0;}
+		if(button_state==samples_required){
+			return 1;
+		}
+		if( (i>(samples_window-samples_required))&& (button_state==0)){return 0;}
+	}
+	return 0;
+}
 /* USER CODE END 4 */
 
 /**
